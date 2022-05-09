@@ -17,84 +17,9 @@ CREATION DATE: 5/3/2022
   <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
-  <style>
-  body
-  {
-   margin:0;
-   padding:0;
-   background-color:#f1f1f1;
-  }
-  .box
-  {
-   width:1270px;
-   padding:20px;
-   background-color:#fff;
-   border:1px solid #ccc;
-   border-radius:5px;
-   margin-top:25px;
-   box-sizing:border-box;
-  }
-
-
-  /* Dropdown Button */
-.dropbtn {
-  background-color: #3498DB;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-/* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #2980B9;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd}
-
-/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-.show {display:block;}
-
-  </style>
  </head>
  <body>
   <div class="container box">
-
-<div class="dropdown">
-  <button onclick="DDMenu()" class="dropbtn">button</button>
-  <div id="myDropdown" class="dropdown-content">
-   <form method="POST" action = "get.php"> <button type="submit" name="logout">Logout</button></form>
-
-  </div>
-</div>
-
-
    <h1 align="center">Add Edit Delete Datatables Records </h1>
    <br />
    <div class="table-responsive">
@@ -140,6 +65,11 @@ CREATION DATE: 5/3/2022
 
   fetch_data();
 
+
+  /* Function Name: fetch_data
+   * Description: gets the records from the database
+   * Created: 5/3/2022
+   */
   function fetch_data()
   {
    var dataTable = $('#user_data').DataTable({
@@ -153,6 +83,11 @@ CREATION DATE: 5/3/2022
    });
   }
 
+  /* Function Name: update_data
+   * Description: update a record
+   * Parameters: id, column_name, value
+   * Created: 5/3/2022
+   */
   function update_data(id, column_name, value)
   {
    $.ajax({
@@ -238,8 +173,6 @@ CREATION DATE: 5/3/2022
        alert("ID is not a Number")
     } else {
 
-
-
     $.ajax({
      url:"insert.php",
      method:"POST",
@@ -282,27 +215,4 @@ CREATION DATE: 5/3/2022
    }
   });
  });
-
-
-
-
- /* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function DDMenu() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
 </script>

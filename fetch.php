@@ -1,8 +1,14 @@
+<!--
+NAME: Jack Millman
+FILE NAME: fetch.php
+PURPOSE: Gets record(s) in the DB
+CREATION DATE: 5/3/2022
 
+-->
 <?php
 //fetch.php
 $connect = mysqli_connect("localhost", "root", "", "DVRPC-DB.sql");
-$columns = array('first_name', 'last_name');
+$columns = array('name', 'eligibility', 'purpose', 'fundingagencies');
 
 $query = "SELECT * FROM records ";
 
@@ -10,8 +16,10 @@ $query = "SELECT * FROM records ";
 if(isset($_POST["search"]["value"]))
 {
  $query .= '
- WHERE first_name LIKE "%'.$_POST["search"]["value"].'%"
- OR last_name LIKE "%'.$_POST["search"]["value"].'%"
+ WHERE NAME LIKE "%'.$_POST["search"]["value"].'%"
+ OR ELIGIBILITY LIKE "%'.$_POST["search"]["value"].'%"
+ OR PURPOSE LIKE "%'.$_POST["search"]["value"].'%"
+ OR FUNDINGAGENCIES LIKE "%'.$_POST["search"]["value"].'%"
  ';
 }
 
@@ -64,6 +72,11 @@ while($row = mysqli_fetch_array($result))
  $sub_array[] = '<button type="button" name="delete" class="btn btn-danger btn-xs delete" id="'.$row["id"].'">Delete</button>';
  $data[] = $sub_array;
 }
+
+/* Function Name: get_all_data
+ * Description: gets the records from the database
+ * Created: 5/4/2022
+ */
 
 function get_all_data($connect)
 {
